@@ -11,7 +11,7 @@ export default function Teste() {
 					[1, 3],
 					[2, 4],
 					[3, 2],
-					[4, 7],
+					[4, 6],
 				],
 			},
 			{
@@ -21,6 +21,7 @@ export default function Teste() {
 					[1, 1],
 					[2, 5],
 					[3, 6],
+					[3.5, 4],
 					[4, 4],
 				],
 			},
