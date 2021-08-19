@@ -11,18 +11,6 @@ export default function SearchForm() {
 					<form>
 						<div className="form-group row">
 							<div className="col">
-								<label htmlFor="input-numero-do-prontuario">Nº do prontuário:</label>
-								<div className="input-group">
-									<input
-										type="text"
-										className="form-control"
-										id="input-numero-do-prontuario"
-										aria-describedby="basic-addon3"
-										placeholder="Número do prontuário do paciente"
-									/>
-								</div>
-							</div>
-							<div className="col">
 								<label htmlFor="input-numero-do-sus">Nº do SUS:</label>
 								<div className="input-group">
 									<input

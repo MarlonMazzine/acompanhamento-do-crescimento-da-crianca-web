@@ -27,7 +27,7 @@ export default function InitialPage() {
 	return (
 		<>
 			<nav className="navbar p-0 navbar-expand-lg navbar-light bg-default-color sticky-top">
-				<a className="navbar-brand text-default-color ml-4" href="/">
+				<a className="navbar-brand text-default-color ml-4" href="/inicio">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						width="50"
@@ -71,13 +71,13 @@ export default function InitialPage() {
 							</a>
 						</li>
 						<li className="nav-item menu">
-							<a className="p-4 nav-link text-default-color" href="/calculadora">
-								<FontAwesomeIcon icon={faCalculator} /> Calculadora
+							<a className="p-4 nav-link text-default-color" href="/pacientes">
+								<FontAwesomeIcon icon={faUsers} /> Pacientes
 							</a>
 						</li>
 						<li className="nav-item menu">
-							<a className="p-4 nav-link text-default-color" href="/pacientes">
-								<FontAwesomeIcon icon={faUsers} /> Pacientes
+							<a className="p-4 nav-link text-default-color" href="/calculadora">
+								<FontAwesomeIcon icon={faCalculator} /> Calculadora
 							</a>
 						</li>
 						<li className="nav-item logout menu">

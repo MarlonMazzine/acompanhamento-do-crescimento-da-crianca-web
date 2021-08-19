@@ -16,7 +16,6 @@ export const FormContent = styled.form`
     width: 350px;
     padding: 40px;
     border-radius: 15px;
-    resize: both;
     overflow: auto;
     text-align: center;
     background: rgb(33,147,176);
@@ -35,7 +34,7 @@ export const Input = styled.input`
     border-color: transparent;
 `;
 
-export const InputSubmit = styled.input`
+export const InputSubmit = styled.button`
     width: 50%;
     padding: 10px;
     border-color: transparent;
@@ -48,3 +47,13 @@ export const InputSubmit = styled.input`
     background: rgb(252,74,26);
     background: linear-gradient(45deg, rgba(252,74,26,1) 0%, rgba(247,183,51,1) 100%);
 `;
+
+export const CHART_COLORS = {
+	red: "rgb(255, 99, 132)",
+	orange: "rgb(255, 159, 64)",
+	yellow: "rgb(255, 205, 86)",
+	green: "rgb(75, 192, 192)",
+	blue: "rgb(54, 162, 235)",
+	purple: "rgb(153, 102, 255)",
+	grey: "rgb(201, 203, 207)",
+};

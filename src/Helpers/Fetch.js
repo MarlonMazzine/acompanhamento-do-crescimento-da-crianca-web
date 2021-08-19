@@ -13,7 +13,7 @@ export default class Fetch extends React.Component {
                 throw new Error('Não encontrou a url.')
             }
 
-            throw new Error(response.Error.message)
+            throw new Error(response.statusText)
         }).catch(erro => {
             const errorMessage = erro.message
 
