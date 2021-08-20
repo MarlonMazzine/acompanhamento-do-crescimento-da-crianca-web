@@ -4,16 +4,6 @@ import $ from "jquery";
 import "../style.css";
 
 export default function InitialPage() {
-	function teste() {
-		// return await fetch(process.env.WEBSERICE + 'Patient/d3af67c9-0c02-45f2-bc91-fea45af3ee83')
-		// .then(async resposta => {
-		//     console.log(await resposta.json())
-		// }).catch(err => {
-		//     console.log(err)
-		// })
-		console.log("teste");
-	}
-
 	if (document.location.pathname === "/") {
 		return null;
 	}

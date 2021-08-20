@@ -1,11 +1,10 @@
 import { useState } from "react";
 import Chart from "../../Components/Chart/";
-import { DefaultMonthsValues } from "../../Helpers/DefaultMonthsValues";
+import DefaultMonthsValues from "../../Helpers/DefaultMonthsValues";
 import * as DefaultBoysValues0To24 from "../../Helpers/Boys/DefaultValuesBoy0To24Months";
 import { getMonthDifference } from "../../Helpers/MonthDifference";
 import Modal from "../../Components/Modal";
 import * as S from "../../styled";
-import InsertNewWeightAndHeight from "../../Helpers/InsertNewWeightAndHeight";
 
 export default function Calculator() {
 	const [searchTerm, setSearchTerm] = useState("");
@@ -57,7 +56,6 @@ export default function Calculator() {
 									data-toggle="dropdown"
 									data-display="static"
 									aria-haspopup="true"
-									aria-expanded="false"
 									autoComplete="off"
 									required
 								/>

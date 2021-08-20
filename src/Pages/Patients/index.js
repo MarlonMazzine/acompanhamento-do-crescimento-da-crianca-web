@@ -6,8 +6,8 @@ export default function Patients() {
 	 * PIG = Pequeno para Idade Gestacional
 	 * GIG = Grande para Idade Gestacional
 	 */
-
-	const names = JSON.parse(sessionStorage.getItem("Patients"));
+	const sessionPatientsStorage = sessionStorage.getItem("Patients");
+	const names = sessionPatientsStorage === '' ? [] : JSON.parse(sessionPatientsStorage);
 
 	return (
 		<>

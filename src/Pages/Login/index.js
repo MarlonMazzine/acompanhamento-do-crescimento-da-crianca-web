@@ -1,18 +1,7 @@
 import { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import FetchGet from "../../Helpers/FetchGet";
 import FetchPost from "../../Helpers/FetchPost";
 import * as S from "../../styled";
-import $ from "jquery";
-
-$("#submitButton").on("click", () => {
-	console.log("teste");
-	// disable button
-	// $(this).prop("disabled", false);
-	// add spinner to button
-	$(this).text('<span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>');
-});
 
 export default function Login() {
 	const [userName, setUserName] = useState("");
