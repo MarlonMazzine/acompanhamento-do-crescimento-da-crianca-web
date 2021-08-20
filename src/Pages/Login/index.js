@@ -64,6 +64,7 @@ export default function Login() {
 					<S.Input
 						type="text"
 						placeholder="Usuário"
+						className="form-control"
 						value={userName}
 						onChange={(e) => setUserName(e.target.value)}
 						// required
@@ -71,6 +72,7 @@ export default function Login() {
 					<S.Input
 						type="password"
 						placeholder="Senha"
+						className="form-control"
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
 						// required

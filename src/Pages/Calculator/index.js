@@ -1,18 +1,21 @@
 import { useState } from "react";
-import "../../style.css";
 import Chart from "../../Components/Chart/";
 import { DefaultMonthsValues } from "../../Helpers/DefaultMonthsValues";
 import * as DefaultBoysValues0To24 from "../../Helpers/Boys/DefaultValuesBoy0To24Months";
 import { getMonthDifference } from "../../Helpers/MonthDifference";
 import Modal from "../../Components/Modal";
+import * as S from "../../styled";
+import InsertNewWeightAndHeight from "../../Helpers/InsertNewWeightAndHeight";
 
 export default function Calculator() {
 	const [searchTerm, setSearchTerm] = useState("");
 	const [weight, setWeight] = useState("");
-	const [height, setHeight] = useState("");
+	const [height, setHeight] = useState(0);
 	const [gender, setGender] = useState("");
 	const [birthdate, setPatientBirthdate] = useState("");
 	const [patientId, setPatientId] = useState("");
+	const [userName, setUserName] = useState("");
+	const [monthDifference, setMonthDifference] = useState(0);
 
 	const patients = JSON.parse(sessionStorage.getItem("Patients"));
 	const handleChange = (event) => {
@@ -26,7 +29,6 @@ export default function Calculator() {
 		? patientsNames
 		: patientsNames.filter((person) => person.toLowerCase().includes(searchTerm.toLocaleLowerCase()));
 
-	const monthDifference = getMonthDifference(birthdate);
 	const defaultValue = birthdate === "" ? DefaultBoysValues0To24 : DefaultMonthsValues(monthDifference, gender);
 	const start = defaultValue.MonthStart;
 	const end = defaultValue.MonthEnd;
@@ -40,7 +42,7 @@ export default function Calculator() {
 			<div className="card mb-4">
 				<div className="card-body">
 					<h2 className="mb-4">Calculadora</h2>
-					<form onSubmit="return false;">
+					<form onSubmit={() => { return false; }}>
 						<label htmlFor="input-patient-name">Nome do paciente:</label>
 						<div className="form-group">
 							<div className="btn-group w-100">
@@ -65,10 +67,14 @@ export default function Calculator() {
 											<li
 												className="dropdown-item btn"
 												onClick={() => {
-													document.getElementById("input-patient-name").value =
-														item.toString();
+													setSearchTerm(item.toString());
 													setGender(patients[index]["gender"]);
 													setPatientBirthdate(patients[index]["birthdate"]);
+													setMonthDifference(
+														getMonthDifference(patients[index]["birthdate"])
+													);
+													setPatientId(patients[index]["id"]);
+													setUserName(patients[index]["userName"]);
 												}}
 												key={index}
 											>
@@ -81,7 +87,7 @@ export default function Calculator() {
 						</div>
 						<div className="form-group row">
 							<div className="col">
-								<label htmlFor="input-weight">Peso:</label>
+								<label htmlFor="input-weight">Peso (kg):</label>
 								<div className="input-group">
 									<input
 										className="form-control"
@@ -99,7 +105,7 @@ export default function Calculator() {
 								</div>
 							</div>
 							<div className="col">
-								<label htmlFor="input-height">Altura:</label>
+								<label htmlFor="input-height">Altura (cm):</label>
 								<div className="input-group">
 									<input
 										className="form-control"
@@ -119,29 +125,18 @@ export default function Calculator() {
 						</div>
 						<div className="form-group row mt-4 text-center">
 							<div className="col-sm-10 mx-auto">
-								<button
-									type="submit"
-									className="btn bg-default-color text-default-color pt-2 pb-2 pl-5 pr-5"
-									onClick={() => {
-										setHeight(document.getElementById("input-height").value);
-										setWeight(document.getElementById("input-weight").value);
-									}}
-								>
-									Calcular
-								</button>
-								<button
+								<S.ButtonReset
 									type="reset"
-									className="btn btn-light ml-3 pt-2 pb-2 pl-5 pr-5"
+									className="btn bg-default-color text-default-color ml-3 pt-2 pb-2 pl-5 pr-5"
 									onClick={() => {
-										document.getElementById("input-patient-name").value = "";
-										document.getElementById("input-height").value = "";
-										document.getElementById("input-weight").value = "";
+										setSearchTerm("");
 										setHeight("");
 										setWeight("");
+										setMonthDifference("");
 									}}
 								>
 									Limpar
-								</button>
+								</S.ButtonReset>
 							</div>
 						</div>
 					</form>
@@ -153,18 +148,21 @@ export default function Calculator() {
 			<Chart age={monthDifference} height={height} defaultValue={defaultValue} totalOfMonths={totalOfMonths} />
 			<div className="form-group row mt-4 text-center">
 				<div className="col-sm-11 mx-auto">
-					<button
-						className="btn btn-primary bg-default-color text-default-color mr-3"
+					<S.InputSubmit
+						className="btn text-default-color mr-3"
 						data-target="#exampleModal"
 						data-toggle="modal"
+						// onClick={async () => {await InsertNewWeightAndHeight(patientId, weight, height)}}
 					>
 						Salvar dados
-					</button>
-					<button className="btn btn-primary bg-default-color text-default-color">Imprimir</button>
+					</S.InputSubmit>
+					<S.ButtonReset className="btn btn-primary bg-default-color text-default-color">
+						Imprimir
+					</S.ButtonReset>
 				</div>
 			</div>
 
-			<Modal />
+			<Modal height={height} userName={userName} weight={weight} patientId={patientId} />
 		</>
 	);
 }

@@ -1,5 +1,4 @@
 import SearchForm from "./Partials/SearchForm";
-import "../../style.css";
 
 export default function Patients() {
 	/**
@@ -18,7 +17,6 @@ export default function Patients() {
 					<table className="table table-hover table-striped table-bordered text-center">
 						<thead className="bg-default-color">
 							<tr>
-								{/* <th className="text-default-color">Prontuário</th> */}
 								<th className="text-default-color">SUS</th>
 								<th className="text-default-color">Nome</th>
 								<th className="text-default-color">Nascimento</th>
@@ -27,8 +25,7 @@ export default function Patients() {
 						<tbody>
 							{names.map((name, index) => {
 								return (
-									<tr className="pointer" key={index} onClick={() => alert(`Cliquei em ${name}`)}>
-										{/* <td className="align-middle">{name["id"]}</td> */}
+									<tr className="pointer" key={index} onClick={() => alert(`Cliquei em ${name['userName']}`)}>
 										<td className="align-middle">{name["document"]}</td>
 										<td className="align-middle">{name["userName"]}</td>
 										<td className="align-middle">

@@ -129,13 +129,21 @@ table {
 }
 
 .bg-default-color {
-	background-color: #2f6690 !important;
+	background: rgb(33, 147, 176);
+	background: -moz-linear-gradient(45deg, rgba(33, 147, 176, 1) 0%, rgba(109, 213, 237, 1) 100%);
+	background: -webkit-linear-gradient(45deg, rgba(33, 147, 176, 1) 0%, rgba(109, 213, 237, 1) 100%);
+	background: linear-gradient(45deg, rgba(33, 147, 176, 1) 0%, rgba(109, 213, 237, 1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#2193b0",endColorstr="#6dd5ed",GradientType=1);
 }
 
 .menu:hover,
 .li-active,
 button.bg-default-color:hover {
-	background-color: #234c6c !important;
+	background: rgb(28, 125, 150);
+	/* background: -moz-linear-gradient(45deg, rgb(28, 125, 150) 0%, rgb(87, 178, 199) 100%);
+	background: -webkit-linear-gradient(45deg, rgba(28, 125, 150, 1) 0%, rgba(87, 178, 199, 1) 100%);
+	background: linear-gradient(45deg, rgba(28, 125, 150, 1) 0%, rgba(87, 178, 199, 1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#2193b0",endColorstr="#6dd5ed",GradientType=1); */
 }
 
 .text-default-color {

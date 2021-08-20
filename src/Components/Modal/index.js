@@ -1,8 +1,10 @@
-export default function Modal(props) {
-    const properties = [props.height, props.userName, props.weight]
+import InsertNewWeightAndHeight from "../../Helpers/InsertNewWeightAndHeight";
 
-	if (properties.includes(undefined)) {
-        return null;
+export default function Modal(props) {
+	const properties = [props.height, props.userName, props.weight, props.patientId];
+
+	if (properties.includes("")) {
+		return null;
 	} else {
 		return (
 			<>
@@ -26,17 +28,18 @@ export default function Modal(props) {
 								Peso: {props.weight}
 							</div>
 							<div className="modal-footer">
-								<form action={`${process.env.REACT_APP_WEBSERICE_V1}/para outro lugar`} method="POST">
-									<input value={props.patientId} name="patientId" hidden />
-									<input value={props.height} name="height" hidden />
-									<input value={props.wieght} name="wieght" hidden />
-									<button type="button" className="btn btn-secondary mr-3" data-dismiss="modal">
-										Cancelar
-									</button>
-									<button type="submit" className="btn btn-primary">
-										Salvar
-									</button>
-								</form>
+								<button type="button" className="btn btn-secondary mr-3" data-dismiss="modal">
+									Cancelar
+								</button>
+								<button
+									type="button"
+									className="btn btn-primary"
+									onClick={async () => {
+										await InsertNewWeightAndHeight(props.patientId, props.weight, props.height);
+									}}
+								>
+									Salvar
+								</button>
 							</div>
 						</div>
 					</div>

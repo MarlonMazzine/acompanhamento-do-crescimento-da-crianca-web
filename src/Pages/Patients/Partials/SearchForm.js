@@ -1,6 +1,4 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
-import "../../../style.css";
+import * as S from "../../../styled";
 
 export default function SearchForm() {
 	return (
@@ -11,12 +9,12 @@ export default function SearchForm() {
 					<form>
 						<div className="form-group row">
 							<div className="col">
-								<label htmlFor="input-numero-do-sus">Nº do SUS:</label>
+								<label htmlFor="input-sus-number">Nº do SUS:</label>
 								<div className="input-group">
 									<input
 										type="text"
 										className="form-control"
-										id="input-numero-do-sus"
+										id="input-sus-number"
 										aria-describedby="basic-addon3"
 										placeholder="Número da carteirinha do SUS do paciente"
 									/>
@@ -25,12 +23,12 @@ export default function SearchForm() {
 						</div>
 						<div className="form-group row">
 							<div className="col">
-								<label htmlFor="input-nome-do-paciente">Nome:</label>
+								<label htmlFor="input-patient-name">Nome:</label>
 								<div className="input-group">
 									<input
 										type="text"
 										className="form-control"
-										id="input-nome-do-paciente"
+										id="input-patient-name"
 										aria-describedby="basic-addon3"
 										placeholder="Informe aqui o nome do paciente"
 									/>
@@ -51,18 +49,13 @@ export default function SearchForm() {
 								</div>
 							</div>
 						</div>
-
-						<div className="form-group row mt-4">
+						<div className="form-group row mt-4 justify-content-between">
 							<div className="col-sm-10">
-								<button
-									type="submit"
-									className="btn btn-primary bg-default-color text-default-color pt-2 pb-2 pl-5 pr-5"
-								>
-									Filtrar
-								</button>
-								<button type="reset" className="btn btn-light ml-3 pt-2 pb-2 pl-5 pr-5">
+								<S.InputSubmit className="btn text-default-color mr-3" type="submit">Filtrar</S.InputSubmit>
+								<S.ButtonReset className="btn bg-default-color text-default-color mr-3" type="reset">
 									Limpar
-								</button>
+								</S.ButtonReset>
+								<S.ButtonNewRegister className="btn text-default-color mr-3" type="submit">Adicionar</S.ButtonNewRegister>
 							</div>
 						</div>
 					</form>
