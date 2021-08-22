@@ -1,6 +1,22 @@
+import { useCallback, useState } from "react";
+import ModalNewPatient from "../../../Components/ModalNewPatient";
+import filterPatients from "../../../Helpers/PatientsFilter";
 import * as S from "../../../styled";
 
-export default function SearchForm() {
+export default function SearchForm({patients, onFiltered}) {
+	const [susValue, setSusValue] = useState("");
+	const [nameValue, setNameValue] = useState("");
+	const [birthdateValue, setBirthdateValue] = useState("");
+
+	const today = new Date();
+	const dateNow = today.toISOString().slice(0, 10);
+	const dateNineteenYearsLater = new Date().setDate(today.getDate() - 6935);
+	const minDate = new Date(dateNineteenYearsLater).toISOString().slice(0, 10);
+
+	const handleOnFiltered = useCallback((patientsFiltered) => {
+		onFiltered(patientsFiltered);
+	}, [onFiltered]);
+
 	return (
 		<>
 			<div className="card mb-4">
@@ -12,11 +28,16 @@ export default function SearchForm() {
 								<label htmlFor="input-sus-number">Nº do SUS:</label>
 								<div className="input-group">
 									<input
-										type="text"
+										type="number"
+										maxLength="15"
 										className="form-control"
 										id="input-sus-number"
 										aria-describedby="basic-addon3"
 										placeholder="Número da carteirinha do SUS do paciente"
+										value={susValue}
+										onChange={(e) => setSusValue(e.target.value)}
+										min={111111111111111}
+										max={999999999999999}
 									/>
 								</div>
 							</div>
@@ -29,8 +50,13 @@ export default function SearchForm() {
 										type="text"
 										className="form-control"
 										id="input-patient-name"
+										maxLength="255"
 										aria-describedby="basic-addon3"
 										placeholder="Informe aqui o nome do paciente"
+										value={nameValue}
+										onChange={(e) => setNameValue(e.target.value)}
+										min={minDate}
+										max={dateNow}
 									/>
 								</div>
 							</div>
@@ -40,27 +66,54 @@ export default function SearchForm() {
 								<label htmlFor="input-bithdate">Data de nascimento:</label>
 								<div className="input-group">
 									<input
-										type="text"
+										type="date"
 										className="form-control"
 										id="input-bithdate"
 										aria-describedby="basic-addon3"
-										placeholder="Data de nascimento do paciente"
+										value={birthdateValue}
+										onChange={(e) => setBirthdateValue(e.target.value)}
 									/>
 								</div>
 							</div>
 						</div>
 						<div className="form-group row mt-4 justify-content-between">
 							<div className="col-sm-10">
-								<S.InputSubmit className="btn text-default-color mr-3" type="submit">Filtrar</S.InputSubmit>
-								<S.ButtonReset className="btn bg-default-color text-default-color mr-3" type="reset">
+								<S.InputSubmit
+									className="btn text-default-color mr-3"
+									type="button"
+									onClick={() => {
+										const patientsFiltered = filterPatients(susValue, nameValue, birthdateValue);
+										handleOnFiltered(patientsFiltered);
+									}}
+								>
+									Filtrar
+								</S.InputSubmit>
+								<S.ButtonReset
+									className="btn text-default-color mr-3"
+									type="reset"
+									onClick={() => {
+										setBirthdateValue("");
+										setNameValue("");
+										setSusValue("");
+									}}
+								>
 									Limpar
 								</S.ButtonReset>
-								<S.ButtonNewRegister className="btn text-default-color mr-3" type="submit">Adicionar</S.ButtonNewRegister>
+								<S.ButtonNewRegister
+									className="btn bg-default-color text-default-color mr-3"
+									type="button"
+									data-target="#modal-new-patient"
+									data-toggle="modal"
+								>
+									+ Adicionar
+								</S.ButtonNewRegister>
 							</div>
 						</div>
 					</form>
 				</div>
 			</div>
+
+			<ModalNewPatient />
 		</>
 	);
 }

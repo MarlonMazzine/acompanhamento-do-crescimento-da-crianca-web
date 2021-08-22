@@ -1,7 +1,9 @@
 export const getMonthDifference = (patientBirthDate) => {
 	const dateObject = new Date(patientBirthDate);
-	var diffMonth = (new Date().getTime() - dateObject.getTime()) / 1000;
-	diffMonth /= 60 * 60 * 24 * 7 * 4;
+	const today = new Date();
+	var months = (today.getFullYear() - dateObject.getFullYear()) * 12;
+	months -= dateObject.getMonth();
+	months += today.getMonth();
 
-	return Math.round(diffMonth);
+	return Math.round(months);
 };

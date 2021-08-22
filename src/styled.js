@@ -40,30 +40,11 @@ export const InputSubmit = styled.button`
 	color: white;
 	font-weight: bolder;
 	outline: none;
-	cursor: pointer;
+	cursor: pointer !important;
 	background: rgb(252, 74, 26);
 	background: linear-gradient(45deg, rgba(252, 74, 26, 1) 0%, rgba(247, 183, 51, 1) 100%);
     &:hover {
 		background: coral;
-	}
-`;
-
-export const ButtonNewRegister = styled.button`
-	padding: 10px 30px;
-	border-color: transparent;
-	border-radius: 10px;
-	margin: 10px;
-	color: white;
-	font-weight: bolder;
-	outline: none;
-	cursor: pointer;
-	background: rgb(142, 158, 171);
-	background: -moz-linear-gradient(45deg, rgba(142, 158, 171, 1) 0%, rgba(238, 242, 243, 1) 100%);
-	background: -webkit-linear-gradient(45deg, rgba(142, 158, 171, 1) 0%, rgba(238, 242, 243, 1) 100%);
-	background: linear-gradient(45deg, rgba(142, 158, 171, 1) 0%, rgba(238, 242, 243, 1) 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#8e9eab",endColorstr="#eef2f3",GradientType=1);
-	&:hover {
-		background: gray;
 	}
 `;
 
@@ -75,7 +56,26 @@ export const ButtonReset = styled.button`
 	color: white;
 	font-weight: bolder;
 	outline: none;
-	cursor: pointer;
+	cursor: pointer !important;
+	background: rgb(142, 158, 171);
+	background: -moz-linear-gradient(45deg, rgba(142, 158, 171, 1) 0%, rgba(238, 242, 243, 1) 100%);
+	background: -webkit-linear-gradient(45deg, rgba(142, 158, 171, 1) 0%, rgba(238, 242, 243, 1) 100%);
+	background: linear-gradient(45deg, rgba(142, 158, 171, 1) 0%, rgba(238, 242, 243, 1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#8e9eab",endColorstr="#eef2f3",GradientType=1);
+	&:hover {
+		background: gray;
+	}
+`;
+
+export const ButtonNewRegister = styled.button`
+	padding: 10px 30px;
+	border-color: transparent;
+	border-radius: 10px;
+	margin: 10px;
+	color: white;
+	font-weight: bolder;
+	outline: none;
+	cursor: pointer !important;
 `;
 
 export const CHART_COLORS = {

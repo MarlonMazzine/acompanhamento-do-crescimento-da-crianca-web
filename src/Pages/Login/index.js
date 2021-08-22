@@ -1,6 +1,8 @@
 import { useState } from "react";
 import FetchGet from "../../Helpers/FetchGet";
 import FetchPost from "../../Helpers/FetchPost";
+import Headers from "../../Helpers/Headers";
+import { getStorageAuthenticationInformations } from "../../Helpers/SessionStorage";
 import * as S from "../../styled";
 
 export default function Login() {
@@ -21,20 +23,20 @@ export default function Login() {
 		});
 		// const URL = process.env.REACT_APP_CORS_TO_ANYWHERE + process.env.REACT_APP_WEBSERICE_V1 + '/login'
 		const URL_LOGIN = process.env.REACT_APP_WEBSERICE_V1 + "/login";
-		const header = {
-			"Content-Type": "application/json",
-		};
+		const header = new Headers().getJsonContentTypeHeader();
 
 		try {
 			sessionStorage.setItem(
-				"AutheticationInformations",
+				"AuthenticationInformations",
 				await new FetchPost().getTextResponse(URL_LOGIN, login, header)
 			);
 
-			const doctorId = JSON.parse(sessionStorage.getItem("AutheticationInformations"))["doctor"]["id"];
-			const URL_DOCTORS = `${process.env.REACT_APP_WEBSERICE_V1}/patient/patients-by-doctor/${doctorId}`;
+			const authenticationInformations = getStorageAuthenticationInformations();
+			const doctorLogged = authenticationInformations['doctor'];
+			const doctorId = doctorLogged["id"];
+			const URL_DOCTORS = `${process.env.REACT_APP_WEBSERICE_V1}/patient/${doctorId}`;
 			const header2 = {
-				Authorization: JSON.parse(sessionStorage.getItem("AutheticationInformations"))["token"],
+				Authorization: authenticationInformations["token"],
 			};
 
 			sessionStorage.setItem("Patients", await new FetchGet().getTextResponse(URL_DOCTORS, header2));

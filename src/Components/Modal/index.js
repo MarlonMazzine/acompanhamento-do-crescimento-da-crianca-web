@@ -11,7 +11,7 @@ export default function Modal(props) {
 				<div
 					className="modal fade show"
 					id="exampleModal"
-					tabindex="-1"
+					tabIndex="-1"
 					aria-labelledby="exampleModalLabel"
 					aria-hidden="true"
 				>
@@ -22,10 +22,10 @@ export default function Modal(props) {
 								{props.userName}?
 								<br />
 								<br />
-								Altura: {props.height}
+								Altura: {props.height} cm
 								<br />
 								<br />
-								Peso: {props.weight}
+								Peso: {props.weight} kg
 							</div>
 							<div className="modal-footer">
 								<button type="button" className="btn btn-secondary mr-3" data-dismiss="modal">

@@ -1,4 +1,5 @@
 import FetchPost from "../Helpers/FetchPost";
+import Headers from "./Headers";
 
 export default async function InsertNewWeightAndHeight(patientId, weight, height) {
 	const patientInformations = [patientId, weight, height];
@@ -13,13 +14,10 @@ export default async function InsertNewWeightAndHeight(patientId, weight, height
 			height: height,
 		});
 		
-		const header = {
-			"Content-Type": "application/json",
-			Authorization: JSON.parse(sessionStorage.getItem("AutheticationInformations"))["token"],
-		};
+		const headers = new Headers().getJsonContentTypeHeaderAuthorization();
 		
-		debugger;
-		await new FetchPost().getTextResponse(URL, body, header);
+		await new FetchPost().getTextResponse(URL, body, headers);
 		alert("Dados salvos com sucesso!");
+		window.location.reload();
 	}
 }

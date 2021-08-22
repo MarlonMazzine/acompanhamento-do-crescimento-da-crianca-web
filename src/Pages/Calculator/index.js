@@ -1,9 +1,10 @@
 import { useState } from "react";
+import { getMonthDifference } from "../../Helpers/MonthDifference";
+import { getStoragePatients } from "../../Helpers/SessionStorage";
 import Chart from "../../Components/Chart/";
 import DefaultMonthsValues from "../../Helpers/DefaultMonthsValues";
-import * as DefaultBoysValues0To24 from "../../Helpers/Boys/DefaultValuesBoy0To24Months";
-import { getMonthDifference } from "../../Helpers/MonthDifference";
 import Modal from "../../Components/Modal";
+import * as DefaultBoysValues0To24 from "../../Helpers/Boys/DefaultValuesBoy0To24Months";
 import * as S from "../../styled";
 
 export default function Calculator() {
@@ -16,7 +17,7 @@ export default function Calculator() {
 	const [userName, setUserName] = useState("");
 	const [monthDifference, setMonthDifference] = useState(0);
 
-	const patients = JSON.parse(sessionStorage.getItem("Patients"));
+	const patients = getStoragePatients();
 	const handleChange = (event) => {
 		setSearchTerm(event.target.value);
 	};
@@ -41,7 +42,11 @@ export default function Calculator() {
 			<div className="card mb-4">
 				<div className="card-body">
 					<h2 className="mb-4">Calculadora</h2>
-					<form onSubmit={() => { return false; }}>
+					<form
+						onSubmit={() => {
+							return false;
+						}}
+					>
 						<label htmlFor="input-patient-name">Nome do paciente:</label>
 						<div className="form-group">
 							<div className="btn-group w-100">
@@ -115,7 +120,7 @@ export default function Calculator() {
 										min="1"
 										max="300"
 										maxLength="5"
-										value={height}
+										value={height === 0 ? "" : height}
 										onChange={(e) => setHeight(e.target.value)}
 									/>
 								</div>
@@ -125,7 +130,7 @@ export default function Calculator() {
 							<div className="col-sm-10 mx-auto">
 								<S.ButtonReset
 									type="reset"
-									className="btn bg-default-color text-default-color ml-3 pt-2 pb-2 pl-5 pr-5"
+									className="btn text-default-color ml-3 pt-2 pb-2 pl-5 pr-5"
 									onClick={() => {
 										setSearchTerm("");
 										setHeight("");
@@ -150,13 +155,12 @@ export default function Calculator() {
 						className="btn text-default-color mr-3"
 						data-target="#exampleModal"
 						data-toggle="modal"
-						// onClick={async () => {await InsertNewWeightAndHeight(patientId, weight, height)}}
 					>
 						Salvar dados
 					</S.InputSubmit>
-					<S.ButtonReset className="btn btn-primary bg-default-color text-default-color">
+					<S.ButtonNewRegister className="btn btn-primary bg-default-color text-default-color">
 						Imprimir
-					</S.ButtonReset>
+					</S.ButtonNewRegister>
 				</div>
 			</div>
 

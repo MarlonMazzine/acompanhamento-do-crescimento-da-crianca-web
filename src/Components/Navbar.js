@@ -2,8 +2,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignOutAlt, faUsers, faCalculator, faHome } from "@fortawesome/free-solid-svg-icons";
 import $ from "jquery";
 import "../style.css";
+import { getStorageAuthenticationInformations } from "../Helpers/SessionStorage";
 
 export default function InitialPage() {
+	if (getStorageAuthenticationInformations() === null) {
+		alert("Você precisa estar autenticado para acessar esta página.")
+		window.location.href = "/";
+	}
+
 	if (document.location.pathname === "/") {
 		return null;
 	}
