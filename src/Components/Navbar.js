@@ -23,7 +23,7 @@ export default function InitialPage() {
 	return (
 		<>
 			<nav className="navbar p-0 navbar-expand-lg navbar-light bg-default-color sticky-top">
-				<a className="navbar-brand text-default-color ml-4" href="/inicio">
+				<a className="navbar-brand text-default-color ml-4" href="/pacientes">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						width="50"
@@ -61,11 +61,11 @@ export default function InitialPage() {
 				</button>
 				<div className="collapse navbar-collapse w-100" id="navbarNavDropdown">
 					<ul className="navbar-nav">
-						<li className="nav-item menu">
+						{/* <li className="nav-item menu">
 							<a className="p-4 nav-link text-default-color" href="/inicio">
 								<FontAwesomeIcon icon={faHome} /> Início
 							</a>
-						</li>
+						</li> */}
 						<li className="nav-item menu">
 							<a className="p-4 nav-link text-default-color" href="/pacientes">
 								<FontAwesomeIcon icon={faUsers} /> Pacientes

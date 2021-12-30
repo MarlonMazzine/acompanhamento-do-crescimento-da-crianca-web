@@ -24,6 +24,15 @@ export const FormContent = styled.form`
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#2193b0",endColorstr="#6dd5ed",GradientType=1);
 `;
 
+export const ModalBackgound = styled.div`
+	background-color: rgba(10, 10, 10, 0.86);
+	bottom: 0;
+	left: 0;
+	position: absolute;
+	right: 0;
+	top: 0;
+`;
+
 export const Input = styled.input`
 	width: 100%;
 	padding: 10px;
@@ -43,7 +52,7 @@ export const InputSubmit = styled.button`
 	cursor: pointer !important;
 	background: rgb(252, 74, 26);
 	background: linear-gradient(45deg, rgba(252, 74, 26, 1) 0%, rgba(247, 183, 51, 1) 100%);
-    &:hover {
+	&:hover {
 		background: coral;
 	}
 `;

@@ -2,18 +2,15 @@ import React from "react";
 import { Line } from "react-chartjs-2";
 import { CHART_COLORS } from "../../styled";
 
-export default function Teste(props) {
+export default function Chart(props) {
+	const defaultValue = props.defaultValue;
+
 	const data = {
 		labels: props.totalOfMonths,
 		datasets: [
 			{
 				label: "Seu paciente",
-				data: [
-					{
-						x: props.age,
-						y: props.height,
-					},
-				],
+				data: props.data,
 				backgroundColor: CHART_COLORS.purple,
 				borderColor: CHART_COLORS.purple,
 				pointStyle: "circle",
@@ -21,31 +18,31 @@ export default function Teste(props) {
 			},
 			{
 				label: "3%",
-				data: props.defaultValue.threePercent,
+				data: defaultValue.threePercent,
 				backgroundColor: CHART_COLORS.red,
 				borderColor: CHART_COLORS.red,
 			},
 			{
 				label: "15%",
-				data: props.defaultValue.fifteenPercent,
+				data: defaultValue.fifteenPercent,
 				backgroundColor: CHART_COLORS.yellow,
 				borderColor: CHART_COLORS.yellow,
 			},
 			{
 				label: "50%",
-				data: props.defaultValue.fiftyPercent,
+				data: defaultValue.fiftyPercent,
 				backgroundColor: CHART_COLORS.green,
 				borderColor: CHART_COLORS.green,
 			},
 			{
 				label: "85%",
-				data: props.defaultValue.eightyFivePercent,
+				data: defaultValue.eightyFivePercent,
 				backgroundColor: CHART_COLORS.yellow,
 				borderColor: CHART_COLORS.yellow,
 			},
 			{
 				label: "97%",
-				data: props.defaultValue.ninetySevenPercent,
+				data: defaultValue.ninetySevenPercent,
 				backgroundColor: CHART_COLORS.red,
 				borderColor: CHART_COLORS.red,
 			},
@@ -81,7 +78,7 @@ export default function Teste(props) {
 
 	return (
 		<>
-			<div style={{ width: "90%", margin: "auto" }}>
+			<div style={{ width: "70%", margin: "auto" }}>
 				<Line data={data} options={options} />
 			</div>
 		</>

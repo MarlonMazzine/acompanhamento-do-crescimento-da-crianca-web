@@ -1,23 +1,46 @@
 import { useState } from "react";
-import getPatientMeasures from "../../Helpers/PatientMeasures";
+import ChartModal from '../ChartModal'
+import { getMonthDifference } from "../../Helpers/MonthDifference";
+import * as S from "../../styled";
 
 export default function ModalPatientInformations(props) {
-	const teste = props.measures;
-	debugger
+	const [monthDifference, setMonthDifference] = useState(0);
+	const [height, setHeight] = useState(0);
+	const jsonMeasures = props.measures.length > 0 ? JSON.parse(props.measures) : props.measures;
+
+	const data = [
+		{
+			x: monthDifference,
+			y: height,
+		},
+	];
+
 	return (
 		<>
 			<div
-				className="modal fade"
+				className="modal"
 				id="modal-patient-informations"
 				tabIndex="-1"
-				aria-labelledby="modal-patient-informations-label"
-				aria-hidden="true"
+				style={{ display: "none" }}
+				// aria-labelledby="modal-patient-informations-label"
+				// aria-hidden="true"
 			>
+				<S.ModalBackgound />
 				<div className="modal-dialog modal-dialog-scrollable">
 					<div className="modal-content">
 						<div className="modal-header">
 							<h5 className="modal-title">Dados do paciente</h5>
-							<button type="button" className="close" data-dismiss="modal" aria-label="Close">
+							<button
+								type="button"
+								className="close"
+								onClick={() =>
+									// setMonthDifference(
+									// 	getMonthDifference(props.birthdate)
+									// )
+
+									(document.getElementById("modal-patient-informations").style.display = "none")
+								}
+							>
 								<span aria-hidden="true">&times;</span>
 							</button>
 						</div>
@@ -52,12 +75,12 @@ export default function ModalPatientInformations(props) {
 									</div>
 								</div>
 							</div>
-                            <div className="form-group row">
+							<div className="form-group row">
 								<div className="col">
 									<label>Gênero:</label>
 									<div className="input-group">
 										<input
-											type="email"
+											type="text"
 											className="form-control"
 											id="input-gender"
 											maxLength={255}
@@ -68,101 +91,46 @@ export default function ModalPatientInformations(props) {
 								</div>
 							</div>
 
-							<table class="table">
+							<table className="table">
 								<thead>
 									<tr>
 										<th scope="col">Data de inclusão</th>
-										<th scope="col">Peso (kg)</th>
 										<th scope="col">Altura (cm)</th>
 									</tr>
 								</thead>
 								<tbody>
-								{/* JSON.parse(teste).map((p, i) => { console.log(p.weight) }) */}
-									{props.measures.map((measure, i) => {
+									{/* JSON.parse(teste).map((p, i) => { console.log(p.weight) }) */}
+									{jsonMeasures.map((measure, i) => {
+										//pega o measure, concatenar numa string para obter os meses baseados na data de inclusão
+										// meses = diaHoje - diaInclusao
+										// mesesCrianca = diaHoje - nascimentos
+										// mesNaEpoca = mesesCianca - meses
 										return (
-											<tr>
-												<td>Mark</td>
-												<td>Mark</td>
-												<td>Otto</td>
+											<tr key={i}>
+												{/* <td>{measure}</td> */}
+												<td>{new Date(measure.creationDate).toLocaleDateString("pt-BR")}</td>
+												<td>{measure.height}</td>
 											</tr>
 										);
 									})}
-									{/* <tr>
-										<td>Mark</td>
-										<td>Mark</td>
-										<td>Otto</td>
-									</tr>
-									<tr>
-										<td>Mark</td>
-										<td>Mark</td>
-										<td>Otto</td>
-									</tr>
-									<tr>
-										<td>Mark</td>
-										<td>Mark</td>
-										<td>Otto</td>
-									</tr>
-									<tr>
-										<td>Mark</td>
-										<td>Mark</td>
-										<td>Otto</td>
-									</tr>
-									<tr>
-										<td>Mark</td>
-										<td>Mark</td>
-										<td>Otto</td>
-									</tr>
-									<tr>
-										<td>Mark</td>
-										<td>Mark</td>
-										<td>Otto</td>
-									</tr>
-									<tr>
-										<td>Mark</td>
-										<td>Mark</td>
-										<td>Otto</td>
-									</tr>
-									<tr>
-										<td>Mark</td>
-										<td>Mark</td>
-										<td>Otto</td>
-									</tr>
-									<tr>
-										<td>Mark</td>
-										<td>Mark</td>
-										<td>Otto</td>
-									</tr>
-									<tr>
-										<td>Mark</td>
-										<td>Mark</td>
-										<td>Otto</td>
-									</tr>
-									<tr>
-										<td>Mark</td>
-										<td>Mark</td>
-										<td>Otto</td>
-									</tr>
-									<tr>
-										<td>Mark</td>
-										<td>Mark</td>
-										<td>Otto</td>
-									</tr>
-									<tr>
-										<td>Mark</td>
-										<td>Mark</td>
-										<td>Otto</td>
-									</tr>
-									<tr>
-										<td>Mark</td>
-										<td>Mark</td>
-										<td>Otto</td>
-									</tr> */}
 								</tbody>
 							</table>
 						</div>
+						{/* <div className="modal-footer">
+							<S.ButtonNewRegister
+								type="button"
+								className="btn bg-default-color btn-primary"
+								onClick={() => {
+									(document.getElementById("chart-modal").style.display = "block")
+								}}
+							>
+								Gerar gráfico
+							</S.ButtonNewRegister>
+						</div> */}
 					</div>
 				</div>
 			</div>
+			<ChartModal jsonMeasures={jsonMeasures} />
 		</>
 	);
 }

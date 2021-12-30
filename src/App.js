@@ -10,28 +10,31 @@ import Home from './Pages/Home'
 
 function App() {
   return (
-    <Router>
-      <Switch>
-        <Route exact path='/'>
-          <Login />
-        </Route>
-        <Route path='/inicio'>
+		<Router>
+			<Switch>
+				<Route exact path="/">
+					<Login />
+				</Route>
+				{/* <Route path='/inicio'>
           <Navbar />
           <Home />
-        </Route>
-        <Route path='/calculadora'>
-          <Navbar />
-          <Calculator />
-        </Route>
-        <Route path='/pacientes'>
-          <Navbar />
-          <Patients />
-        </Route>
-        <Route path='*'>
-          <Redirect to="/" />
-        </Route>
-      </Switch>
-    </Router>
+        </Route> */}
+				<Route path="/calculadora">
+					<Navbar />
+					<Calculator />
+				</Route>
+				<Route path="/pacientes">
+					<Navbar />
+					<Patients />
+				</Route>
+				<Route path="/sair">
+					<Redirect to="/" />
+				</Route>
+				<Route path="*">
+					<Redirect to="/pacientes" />
+				</Route>
+			</Switch>
+		</Router>
   );
 }
 

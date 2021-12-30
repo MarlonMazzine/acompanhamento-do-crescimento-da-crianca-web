@@ -15,7 +15,7 @@ export default function DefaultMonthsValues(monthDifference, patientGender) {
 				case patientGender === g.female:
 					return DefaultGirlsValues0To24;
 				default:
-					failIfInvalidGender();
+					invalidGenderError();
 			}
 
 			break;
@@ -26,7 +26,7 @@ export default function DefaultMonthsValues(monthDifference, patientGender) {
 				case patientGender === g.female:
 					return DefaultGirlsValues24To60;
 				default:
-					failIfInvalidGender();
+					invalidGenderError();
 			}
 
 			break;
@@ -37,7 +37,7 @@ export default function DefaultMonthsValues(monthDifference, patientGender) {
 				case patientGender === g.female:
 					return DefaultBoysValues61To228;
 				default:
-					failIfInvalidGender();
+					invalidGenderError();
 			}
 
 			break;
@@ -46,6 +46,6 @@ export default function DefaultMonthsValues(monthDifference, patientGender) {
 	}
 }
 
-function failIfInvalidGender() {
+function invalidGenderError() {
 	throw new Error('Gênero inválido! Os gêneros suportados são: "Masculino" ou "Feminino".');
 }

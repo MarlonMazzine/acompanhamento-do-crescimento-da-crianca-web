@@ -1,7 +1,7 @@
 import InsertNewWeightAndHeight from "../../Helpers/InsertNewWeightAndHeight";
 
 export default function Modal(props) {
-	const properties = [props.height, props.userName, props.weight, props.patientId];
+	const properties = [props.height, props.userName, props.patientId];
 
 	if (properties.includes("")) {
 		return null;
@@ -23,9 +23,6 @@ export default function Modal(props) {
 								<br />
 								<br />
 								Altura: {props.height} cm
-								<br />
-								<br />
-								Peso: {props.weight} kg
 							</div>
 							<div className="modal-footer">
 								<button type="button" className="btn btn-secondary mr-3" data-dismiss="modal">

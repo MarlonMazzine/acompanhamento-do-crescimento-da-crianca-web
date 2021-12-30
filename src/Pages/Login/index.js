@@ -40,7 +40,7 @@ export default function Login() {
 			};
 
 			sessionStorage.setItem("Patients", await new FetchGet().getTextResponse(URL_DOCTORS, header2));
-			window.location.href += "inicio";
+			window.location.href += "pacientes";
 		} catch (error) {
 			sessionStorage.clear();
 			alert(error.message);

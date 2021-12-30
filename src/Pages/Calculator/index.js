@@ -24,10 +24,11 @@ export default function Calculator() {
 
 	const patientsNames = [];
 	patients.forEach((p) => patientsNames.push(p["userName"]));
-
 	const results = !searchTerm
 		? patientsNames
-		: patientsNames.filter((person) => person.toLowerCase().includes(searchTerm.toLocaleLowerCase()));
+		: patientsNames
+				.map((_, i) => i)
+				.filter((i) => patientsNames[i].toLowerCase().includes(searchTerm.toLocaleLowerCase()));
 
 	const defaultValue = birthdate === "" ? DefaultBoysValues0To24 : DefaultMonthsValues(monthDifference, gender);
 	const start = defaultValue.MonthStart;
@@ -36,6 +37,13 @@ export default function Calculator() {
 	const totalOfMonths = Array(end - start + 1)
 		.fill()
 		.map((_, idx) => start + idx);
+
+	const data = [
+		{
+			x: monthDifference,
+			y: height,
+		},
+	];
 
 	return (
 		<>
@@ -70,18 +78,20 @@ export default function Calculator() {
 											<li
 												className="dropdown-item btn"
 												onClick={() => {
-													setSearchTerm(item.toString());
-													setGender(patients[index]["gender"]);
-													setPatientBirthdate(patients[index]["birthdate"]);
+													const position = !patients[item] ? index : item;	
+
+													setSearchTerm(patients[position]["userName"].toString());
+													setGender(patients[position]["gender"]);
+													setPatientBirthdate(patients[position]["birthdate"]);
 													setMonthDifference(
-														getMonthDifference(patients[index]["birthdate"])
+														getMonthDifference(patients[position]["birthdate"])
 													);
-													setPatientId(patients[index]["id"]);
-													setUserName(patients[index]["userName"]);
+													setPatientId(patients[position]["id"]);
+													setUserName(patients[position]["userName"]);
 												}}
 												key={index}
 											>
-												{item}
+												{!patients[item] ? item : patients[item]["userName"].toString()}
 											</li>
 										))}
 									</ul>
@@ -89,7 +99,7 @@ export default function Calculator() {
 							</div>
 						</div>
 						<div className="form-group row">
-							<div className="col">
+							{/* <div className="col">
 								<label htmlFor="input-weight">Peso (kg):</label>
 								<div className="input-group">
 									<input
@@ -106,7 +116,7 @@ export default function Calculator() {
 										onChange={(e) => setWeight(e.target.value)}
 									/>
 								</div>
-							</div>
+							</div> */}
 							<div className="col">
 								<label htmlFor="input-height">Altura (cm):</label>
 								<div className="input-group">
@@ -148,7 +158,13 @@ export default function Calculator() {
 
 			<h3 className="text-center mb-4">Altura por idade</h3>
 
-			<Chart age={monthDifference} height={height} defaultValue={defaultValue} totalOfMonths={totalOfMonths} />
+			<Chart
+				data={data}
+				// age={monthDifference}
+				// height={height}
+				defaultValue={defaultValue}
+				totalOfMonths={totalOfMonths}
+			/>
 			<div className="form-group row mt-4 text-center">
 				<div className="col-sm-11 mx-auto">
 					<S.InputSubmit
@@ -158,13 +174,10 @@ export default function Calculator() {
 					>
 						Salvar dados
 					</S.InputSubmit>
-					<S.ButtonNewRegister className="btn btn-primary bg-default-color text-default-color">
-						Imprimir
-					</S.ButtonNewRegister>
 				</div>
 			</div>
 
-			<Modal height={height} userName={userName} weight={weight} patientId={patientId} />
+			<Modal height={height} userName={userName} patientId={patientId} />
 		</>
 	);
 }

@@ -4,6 +4,8 @@ import { getStoragePatients } from "../../Helpers/SessionStorage";
 import SearchForm from "./Partials/SearchForm";
 import * as g from "../../Helpers/Gender";
 import getPatientMeasures from "../../Helpers/PatientMeasures";
+import $ from "jquery";
+import Loading from "../../Components/Loading";
 
 export default function Patients() {
 	/**
@@ -19,6 +21,10 @@ export default function Patients() {
 	const [height, setHeight] = useState(0);
 	const [patientId, setPatientId] = useState("");
 	const [measures, setMeasures] = useState([]);
+	const [modalState, setModalState] = useState(false);
+	const [showLoading, setShowLoading] = useState(false);
+
+	const modal = document.getElementById("modal-patient-informations");
 
 	return (
 		<>
@@ -42,14 +48,27 @@ export default function Patients() {
 									<tr
 										className="pointer"
 										key={index}
-										data-target="#modal-patient-informations"
-										data-toggle="modal"
+										// data-target="#modal-patient-informations"
+										// data-toggle="modal"
 										onClick={async () => {
+											setShowLoading(true);
 											setUserName(patient["userName"]);
 											setPatientId(patient["id"]);
 											setBirthdate(birthdateBR);
 											setGender(genderBR);
-											setMeasures(await getPatientMeasures(patient["id"]));
+
+											const patientMeasures = await getPatientMeasures(patient["id"]);
+											const modal = document.getElementById("modal-patient-informations");
+
+											if (patientMeasures !== "" && modal !== null) {
+												setMeasures(patientMeasures);
+												modal.style.display = "block";
+											} else {
+												alert("Nenhum dado para retornar.");
+											}
+											setShowLoading(false);
+											// setModalState(true);
+											// ModalPatientInformations(patient["userName"], birthdateBR, genderBR, patientMeasures)
 										}}
 									>
 										<td className="align-middle">{patient["document"]}</td>
@@ -62,7 +81,16 @@ export default function Patients() {
 					</table>
 				</div>
 			</div>
-			<ModalPatientInformations userName={userName} birthdate={birthdate} gender={gender} measures={measures} />
+
+			<Loading show={showLoading}/>
+
+			<ModalPatientInformations
+				userName={userName}
+				birthdate={birthdate}
+				gender={gender}
+				measures={measures}
+				modalState={modalState}
+			/>
 		</>
 	);
 }

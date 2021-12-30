@@ -4,13 +4,15 @@ export default class Fetch extends React.Component {
     async getFetchResponse(url, configurations) {
         return await fetch(
             url, configurations
-        ).then(response => {
+        ).then(async (response) => {
             const responseStatus = response.status;
 
             if (response.ok) {
                 return response
             } else if (responseStatus === 404) {
                 throw new Error('Não encontrou a url.')
+            } else if (responseStatus === 400) {
+                throw new Error(await response.text());
             }
 
             throw new Error(response.statusText)
